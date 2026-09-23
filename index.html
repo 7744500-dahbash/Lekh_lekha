@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>תאג' תורת אבות - פרשת לך לך המלאה | דקדוק תימן המדויק</title>
+  <title>תאג' תורת אבות - פרשת לך לך המלאה</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
       --primary-light: #1e3a8a;
       --accent: #b45309;
       --stopper-red: #c53030;       /* אדום: עוצר (אתנחתא, זקף) */
-      --pause-orange: #ea580c;      /* כתום: מטעים / הפסקה קלה (פשטא, יתיב בראש מילה) */
+      --pause-orange: #ea580c;      /* כתום: מטעים / פשטא / יתיב */
       --kisra-taj: #fef08a;         /* צהוב: כיסרא בתאג' */
       --kisra-stam: #cbd5e1;        /* אפור: כיסרא בסת"ם */
       --border: #e2e8f0;
@@ -120,19 +120,6 @@
       font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
-    }
-
-    .file-input-label {
-      background: #fff;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
     }
 
     /* ניווט מברכים */
@@ -357,7 +344,7 @@
   <header>
     <div class="brand">
       <h1>תאג' תורת אבות - פרשת לך לך המלאה</h1>
-      <p>כללי דקדוק תימן: עצירה (באדום) | מטעים / פשטא / יתיב (בכתום) | כיסרא (בצהוב)</p>
+      <p>עצירה (באדום) | מטעים / פשטא / יתיב (בכתום) | כיסרא (בצהוב)</p>
     </div>
     <div class="status-badge" id="dataStatus">טוען...</div>
   </header>
@@ -366,7 +353,7 @@
   <div class="audio-console">
     <div class="audio-info">
       <span class="audio-title" id="audioTrackLabel">קריאת מברך חמישי</span>
-      <span class="audio-sub" id="audioTrackStatus">נוסח תימן | החזן ר' יהודה דהרי הי"ו</span>
+      <span class="audio-sub" id="audioTrackStatus">נוסח תימן | שוהם שמחי - קולך בציון</span>
     </div>
 
     <div class="audio-controls">
@@ -380,11 +367,6 @@
         <option value="1" selected>1.0x</option>
         <option value="1.15">1.15x</option>
       </select>
-
-      <label class="file-input-label" title="טען קובץ שמע מתוך המכשיר">
-        📁 <span style="font-size:0.75rem;">קובץ מקומי</span>
-        <input type="file" id="localAudioPicker" accept="audio/*" style="display:none;" onchange="loadLocalAudio(this)">
-      </label>
     </div>
     <audio id="audioEl" preload="metadata"></audio>
   </div>
@@ -432,27 +414,22 @@
 </div>
 
 <script>
+  // קישור ישיר לקבצים שהועלו (1.mp3 עד 7.mp3)
   const ALIYOT_DEFS = [
-    { id: 1, name: 'מברך ראשון', audioFile: 'audio/aliyah1.mp3', range: { chStart: 12, vStart: 1, chEnd: 12, vEnd: 13 }, ref: "יב:א-יג" },
-    { id: 2, name: 'מברך שני', audioFile: 'audio/aliyah2.mp3', range: { chStart: 12, vStart: 14, chEnd: 13, vEnd: 4 }, ref: "יב:יד-יג:ד" },
-    { id: 3, name: 'מברך שלישי', audioFile: 'audio/aliyah3.mp3', range: { chStart: 13, vStart: 5, chEnd: 13, vEnd: 18 }, ref: "יג:ה-יח" },
-    { id: 4, name: 'מברך רביעי', audioFile: 'audio/aliyah4.mp3', range: { chStart: 14, vStart: 1, chEnd: 14, vEnd: 24 }, ref: "יד:א-כד" },
-    { id: 5, name: 'מברך חמישי', audioFile: 'audio/aliyah5.mp3', range: { chStart: 15, vStart: 1, chEnd: 16, vEnd: 16 }, ref: "טו:א-טז:טז" },
-    { id: 6, name: 'מברך ששי', audioFile: 'audio/aliyah6.mp3', range: { chStart: 17, vStart: 1, chEnd: 17, vEnd: 23 }, ref: "יז:א-כג" },
-    { id: 7, name: 'מברך שביעי', audioFile: 'audio/aliyah7.mp3', range: { chStart: 17, vStart: 24, chEnd: 17, vEnd: 27 }, ref: "יז:כד-כז" },
-    { id: 'all', name: 'כל הפרשה', audioFile: 'audio/all.mp3', range: { chStart: 12, vStart: 1, chEnd: 17, vEnd: 27 }, ref: "126 פסוקים" }
+    { id: 1, name: 'מברך ראשון', audioFile: '1.mp3', range: { chStart: 12, vStart: 1, chEnd: 12, vEnd: 13 }, ref: "יב:א-יג" },
+    { id: 2, name: 'מברך שני', audioFile: '2.mp3', range: { chStart: 12, vStart: 14, chEnd: 13, vEnd: 4 }, ref: "יב:יד-יג:ד" },
+    { id: 3, name: 'מברך שלישי', audioFile: '3.mp3', range: { chStart: 13, vStart: 5, chEnd: 13, vEnd: 18 }, ref: "יג:ה-יח" },
+    { id: 4, name: 'מברך רביעי', audioFile: '4.mp3', range: { chStart: 14, vStart: 1, chEnd: 14, vEnd: 24 }, ref: "יד:א-כד" },
+    { id: 5, name: 'מברך חמישי', audioFile: '5.mp3', range: { chStart: 15, vStart: 1, chEnd: 16, vEnd: 16 }, ref: "טו:א-טז:טז" },
+    { id: 6, name: 'מברך ששי', audioFile: '6.mp3', range: { chStart: 17, vStart: 1, chEnd: 17, vEnd: 23 }, ref: "יז:א-כג" },
+    { id: 7, name: 'מברך שביעי', audioFile: '7.mp3', range: { chStart: 17, vStart: 24, chEnd: 17, vEnd: 27 }, ref: "יז:כד-כז" }
   ];
 
-  // 1. עוצרים אמיתיים בלבד (באדום): אתנחתא (\u0591), סגולתא (\u0592), זקף קטון (\u0594), זקף גדול (\u0595)
+  // 1. עוצרים באדום: אתנחתא (\u0591), סגולתא (\u0592), זקף קטון (\u0594), זקף גדול (\u0595)
   const PURE_STOPPERS_REGEX = /[\u0591\u0592\u0594\u0595]/;
-
-  // 2. כיסרא שלפני סוף פסוק (בצהוב/אפור): טַרְחָא (\u0596)
   const TARCHA_REGEX = /\u0596/;
-
-  // 3. מטעימים / הפסקה קלה (בכתום):
-  // פשטא (\u0599), יתיב - שופר הפוך בראש תיבה (\u059A), רביעי (\u0597), תביר (\u059B), גרש (\u059C), גרשיים (\u059D), פזר (\u05A1), תלישא גדולה (\u05A0), זרקא (\u0598)
+  // 2. מטעים / הפסקה קלה בכתום: פשטא (\u0599), יתיב (\u059A), רביעי (\u0597), תביר, גרש, פזר
   const LIGHT_PAUSE_REGEX = /[\u0599\u059A\u0597\u059B\u059C\u059D\u059E\u059F\u05A0\u05A1\u0598]/;
-
   const NIKKUD_AND_ACCENTS = /[\u0591-\u05BD\u05BF-\u05C2\u05C4\u05C5\u05C7]/g;
 
   let allVerses = [];
@@ -463,9 +440,7 @@
   const playBtn = document.getElementById("playBtn");
 
   function toStamWord(w) {
-    return w.replace(NIKKUD_AND_ACCENTS, '')
-            .replace(/\u05C3/g, '')
-            .replace(/\u05C0/g, '');
+    return w.replace(NIKKUD_AND_ACCENTS, '').replace(/\u05C3/g, '').replace(/\u05C0/g, '');
   }
 
   function analyzeVerseYemenite(rawVerseText, chapter, verseNum) {
@@ -476,25 +451,19 @@
       if (/^\s+$/.test(tok) || tok === '') {
         parsedWords.push({ isSpace: true, text: tok });
       } else {
-        const hasStopper = PURE_STOPPERS_REGEX.test(tok);
-        const hasTarcha = TARCHA_REGEX.test(tok);
-        const hasLightPause = LIGHT_PAUSE_REGEX.test(tok);
-        const hasEtnahta = /\u0591/.test(tok);
-
         parsedWords.push({
           isSpace: false,
           tajOriginal: tok,
           stamOriginal: toStamWord(tok),
-          hasStopper,
-          hasTarcha,
-          hasLightPause,
-          hasEtnahta,
+          hasStopper: PURE_STOPPERS_REGEX.test(tok),
+          hasLightPause: LIGHT_PAUSE_REGEX.test(tok),
+          hasTarcha: TARCHA_REGEX.test(tok),
+          hasEtnahta: /\u0591/.test(tok),
           isKisra: false
         });
       }
     });
 
-    // איתור הכיסרא: אך ורק הטַרְחָא האחרונה שלפני סוף הפסוק
     for (let i = parsedWords.length - 1; i >= 0; i--) {
       const w = parsedWords[i];
       if (!w.isSpace && w.hasTarcha) {
@@ -510,8 +479,7 @@
 
     parsedWords.forEach(w => {
       if (w.isSpace) {
-        tajHtml += w.text;
-        stamHtml += w.text;
+        tajHtml += w.text; stamHtml += w.text;
         if (!passedEtnahta) { part1Taj += w.text; part1Stam += w.text; }
         else { part2Taj += w.text; part2Stam += w.text; }
         return;
@@ -521,43 +489,32 @@
       let stamWordHtml = w.stamOriginal;
 
       if (w.isKisra) {
-        // כיסרא לפני סוף פסוק
         tajWordHtml = `<span class="kisra-taj-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-kisra">${w.stamOriginal}</span>`;
       } else if (w.hasStopper) {
-        // עוצר (אתנחתא, זקף) באדום
         tajWordHtml = `<span class="stopper-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-stopper">${w.stamOriginal}</span>`;
       } else if (w.hasLightPause) {
-        // מטעים / פשטא / יתיב (שופר הפוך בראש מילה) בכתום!
         tajWordHtml = `<span class="orange-pause-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-orange">${w.stamOriginal}</span>`;
       }
-      // שאר הטעמים: מהפך, מונח, מרכא, קדמא - נשארים טקסט רגיל (משרתים)
 
-      tajHtml += tajWordHtml;
-      stamHtml += stamWordHtml;
+      tajHtml += tajWordHtml; stamHtml += stamWordHtml;
 
       if (!passedEtnahta) {
-        part1Taj += tajWordHtml;
-        part1Stam += stamWordHtml;
+        part1Taj += tajWordHtml; part1Stam += stamWordHtml;
         if (w.hasEtnahta) passedEtnahta = true;
       } else {
-        part2Taj += tajWordHtml;
-        part2Stam += stamWordHtml;
+        part2Taj += tajWordHtml; part2Stam += stamWordHtml;
       }
     });
 
     return {
-      chapter,
-      verseNum,
+      chapter, verseNum,
       label: `${toHebrewNum(chapter)}:${toHebrewNum(verseNum)}`,
-      tajHtml,
-      stamHtml,
-      part1Taj: part1Taj || tajHtml,
-      part1Stam: part1Stam || stamHtml,
-      part2Taj: part2Taj || '',
-      part2Stam: part2Stam || ''
+      tajHtml, stamHtml,
+      part1Taj: part1Taj || tajHtml, part1Stam: part1Stam || stamHtml,
+      part2Taj: part2Taj || '', part2Stam: part2Stam || ''
     };
   }
 
@@ -567,48 +524,22 @@
   }
 
   async function loadParashatLekhLekha() {
-    document.getElementById("dataStatus").textContent = "טוען מסורה...";
-
     try {
       const chapters = [12, 13, 14, 15, 16, 17];
-      const fetchPromises = chapters.map(ch =>
-        fetch(`https://www.sefaria.org/api/texts/Genesis.${ch}?context=0`)
-          .then(r => r.json())
-      );
-
-      const data = await Promise.all(fetchPromises);
+      const data = await Promise.all(chapters.map(ch => fetch(`https://www.sefaria.org/api/texts/Genesis.${ch}?context=0`).then(r => r.json())));
       const parsedList = [];
-
       data.forEach((chData, idx) => {
-        const chNum = chapters[idx];
-        const verses = chData.he;
-        verses.forEach((rawText, vIdx) => {
-          const vNum = vIdx + 1;
-          const cleanText = rawText.replace(/<[^>]+>/g, '');
-          parsedList.push(analyzeVerseYemenite(cleanText, chNum, vNum));
+        chData.he.forEach((rawText, vIdx) => {
+          parsedList.push(analyzeVerseYemenite(rawText.replace(/<[^>]+>/g, ''), chapters[idx], vIdx + 1));
         });
       });
-
       allVerses = parsedList;
-      document.getElementById("dataStatus").textContent = `126 פסוקים מדויקים`;
+      document.getElementById("dataStatus").textContent = "126 פסוקים מדויקים";
       renderApp();
       updateAudioTrack();
-    } catch (err) {
+    } catch (e) {
       document.getElementById("dataStatus").textContent = "שגיאה ברשת";
     }
-  }
-
-  function getFilteredVerses() {
-    const currentDef = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[4];
-    if (currentDef.id === 'all') return allVerses;
-
-    const { chStart, vStart, chEnd, vEnd } = currentDef.range;
-    return allVerses.filter(v => {
-      if (v.chapter < chStart || v.chapter > chEnd) return false;
-      if (v.chapter === chStart && v.verseNum < vStart) return false;
-      if (v.chapter === chEnd && v.verseNum > vEnd) return false;
-      return true;
-    });
   }
 
   function renderApp() {
@@ -636,49 +567,41 @@
   function renderDualColumns() {
     const tajBox = document.getElementById("tajVersesContainer");
     const stamBox = document.getElementById("stamVersesContainer");
-    tajBox.innerHTML = "";
-    stamBox.innerHTML = "";
-
-    const activeList = getFilteredVerses();
-
-    activeList.forEach(v => {
-      const rowTaj = document.createElement("div");
-      rowTaj.className = "bible-verse";
-      rowTaj.innerHTML = `<span class="verse-ref">(${v.label})</span> ${v.tajHtml}`;
-      tajBox.appendChild(rowTaj);
-
-      const rowStam = document.createElement("div");
-      rowStam.className = "bible-verse";
-      rowStam.innerHTML = `<span class="verse-ref">(${v.label})</span> ${v.stamHtml}`;
-      stamBox.appendChild(rowStam);
+    tajBox.innerHTML = ""; stamBox.innerHTML = "";
+    getFilteredVerses().forEach(v => {
+      tajBox.innerHTML += `<div class="bible-verse"><span class="verse-ref">(${v.label})</span> ${v.tajHtml}</div>`;
+      stamBox.innerHTML += `<div class="bible-verse"><span class="verse-ref">(${v.label})</span> ${v.stamHtml}</div>`;
     });
   }
 
   function renderChunks() {
     const container = document.getElementById("chunksView");
     container.innerHTML = "";
-
-    const activeList = getFilteredVerses();
-
-    activeList.forEach(v => {
-      const card = document.createElement("div");
-      card.className = "chunk-card";
-      card.innerHTML = `
-        <div class="chunk-title">פסוק (${v.label}) | שלב א': עד האתנחתא</div>
-        <div class="chunk-part taj-typography">${v.part1Taj}</div>
-        <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part1Stam}</div>
-
-        ${v.part2Taj ? `
-          <div class="chunk-title" style="margin-top:8px;">שלב ב': מאתנחתא ועד סוף הפסוק (דרך הכיסרא)</div>
-          <div class="chunk-part taj-typography">${v.part2Taj}</div>
-          <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part2Stam}</div>
-        ` : ''}
-      `;
-      container.appendChild(card);
+    getFilteredVerses().forEach(v => {
+      container.innerHTML += `
+        <div class="chunk-card">
+          <div class="chunk-title">פסוק (${v.label}) | שלב א': עד האתנחתא</div>
+          <div class="chunk-part taj-typography">${v.part1Taj}</div>
+          <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part1Stam}</div>
+          ${v.part2Taj ? `
+            <div class="chunk-title" style="margin-top:8px;">שלב ב': סוף הפסוק (דרך הכיסרא)</div>
+            <div class="chunk-part taj-typography">${v.part2Taj}</div>
+            <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part2Stam}</div>
+          ` : ''}
+        </div>`;
     });
   }
 
-  /* פונקציות נגן השמע */
+  function getFilteredVerses() {
+    const def = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[4];
+    return allVerses.filter(v => {
+      if (v.chapter < def.range.chStart || v.chapter > def.range.chEnd) return false;
+      if (v.chapter === def.range.chStart && v.verseNum < def.range.vStart) return false;
+      if (v.chapter === def.range.chEnd && v.verseNum > def.range.vEnd) return false;
+      return true;
+    });
+  }
+
   function updateAudioTrack() {
     const aliyah = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[4];
     document.getElementById("audioTrackLabel").textContent = `קריאת ${aliyah.name} (${aliyah.ref})`;
@@ -690,8 +613,8 @@
     if (audio.paused) {
       audio.play().then(() => {
         playBtn.textContent = "⏸";
-      }).catch(() => {
-        alert("קובץ השמע אינו זמין בנתיב המקומי. השתמש בכפתור '📁 קובץ מקומי' כדי לטעון אותו ישירות מהמכשיר.");
+      }).catch(err => {
+        console.error(err);
       });
     } else {
       audio.pause();
@@ -700,41 +623,20 @@
   }
 
   function seekAudio(sec) { audio.currentTime += sec; }
-  function setAudioSpeed(rate) { audio.playbackRate = parseFloat(rate); }
-
-  function loadLocalAudio(input) {
-    const file = input.files[0];
-    if (file) {
-      audio.src = URL.createObjectURL(file);
-      document.getElementById("audioTrackStatus").textContent = `קובץ מקומי: ${file.name}`;
-      audio.play();
-      playBtn.textContent = "⏸";
-    }
-  }
+  function setAudioSpeed(r) { audio.playbackRate = parseFloat(r); }
 
   audio.addEventListener("ended", () => { playBtn.textContent = "▶"; });
 
   function setAppMode(mode) {
-    currentMode = mode;
     document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
     event.target.classList.add("active");
+    const dual = document.getElementById("dualView");
+    const chunks = document.getElementById("chunksView");
+    const taj = document.getElementById("tajColCard");
 
-    const dualView = document.getElementById("dualView");
-    const chunksView = document.getElementById("chunksView");
-    const tajCol = document.getElementById("tajColCard");
-
-    if (mode === 'dual') {
-      dualView.classList.remove("hidden");
-      chunksView.classList.add("hidden");
-      tajCol.classList.remove("hidden");
-    } else if (mode === 'chunks') {
-      dualView.classList.add("hidden");
-      chunksView.classList.remove("hidden");
-    } else if (mode === 'scrollOnly') {
-      dualView.classList.remove("hidden");
-      chunksView.classList.add("hidden");
-      tajCol.classList.add("hidden");
-    }
+    if (mode === 'dual') { dual.classList.remove("hidden"); chunks.classList.add("hidden"); taj.classList.remove("hidden"); }
+    else if (mode === 'chunks') { dual.classList.add("hidden"); chunks.classList.remove("hidden"); }
+    else if (mode === 'scrollOnly') { dual.classList.remove("hidden"); chunks.classList.add("hidden"); taj.classList.add("hidden"); }
   }
 
   function toggleVisualCues(enable) {
