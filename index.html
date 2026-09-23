@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>תאג' תורת אבות - פרשת לך לך המלאה | תיקון קוראים ושינון</title>
+  <title>תאג' תורת אבות - פרשת לך לך המלאה עם שמע</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,12 +70,92 @@
       font-weight: 700;
     }
 
-    /* ניווט מברכים ופרקים */
+    /* נגן שמע עליון */
+    .audio-console {
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .audio-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .audio-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .audio-sub {
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-audio {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-audio.play-main {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    .speed-select {
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .file-input-label {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ניווט מברכים */
     .nav-bar {
       display: flex;
       gap: 6px;
       padding: 10px 14px;
-      background: #f1f5f9;
+      background: #f8fafc;
       border-bottom: 1px solid var(--border);
       overflow-x: auto;
       scrollbar-width: thin;
@@ -135,26 +215,11 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    .toggles-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    .toggles-group label {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-    }
-
     /* תוכן הקריאה */
     .viewport {
       padding: 18px 14px;
       overflow-y: auto;
-      max-height: 680px;
+      max-height: 650px;
     }
 
     .dual-columns {
@@ -198,7 +263,6 @@
       vertical-align: middle;
     }
 
-    /* עיצוב הגופן של התאג' - תמיכה מלאה בהצמדת כל תווי הניקוד והטעמים */
     .taj-typography {
       font-family: 'Frank Ruhl Libre', serif;
       font-feature-settings: "kern" 1, "mark" 1, "mkmk" 1;
@@ -210,7 +274,7 @@
       letter-spacing: 0.6px;
     }
 
-    /* חוקי הצביעה התחביריים */
+    /* סימונים תחביריים מדויקים בלבד */
     .apply-cues .stopper-word {
       color: var(--stopper-red) !important;
       font-weight: 800;
@@ -218,7 +282,7 @@
 
     .apply-cues .kisra-taj-word {
       background-color: var(--kisra-taj);
-      padding: 0 3px;
+      padding: 0 4px;
       border-radius: 4px;
     }
 
@@ -230,11 +294,10 @@
 
     .apply-cues .stam-kisra {
       background-color: var(--kisra-stam);
-      padding: 0 3px;
+      padding: 0 4px;
       border-radius: 4px;
     }
 
-    /* מצב שינון בחצאים */
     .chunk-card {
       background: #fff;
       border: 1px solid var(--border);
@@ -267,15 +330,13 @@
       transition: filter 0.2s;
     }
 
-    .hidden-stam.unveiled {
-      filter: none;
-    }
-
+    .hidden-stam.unveiled { filter: none; }
     .hidden { display: none !important; }
 
     @media (max-width: 720px) {
       .dual-columns { grid-template-columns: 1fr; }
-      .brand h1 { font-size: 1.15rem; }
+      .audio-console { flex-direction: column; align-items: flex-start; }
+      .audio-controls { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
@@ -285,10 +346,37 @@
   <header>
     <div class="brand">
       <h1>תאג' תורת אבות - פרשת לך לך המלאה</h1>
-      <p>כל 126 הפסוקים (י"ב, א' – י"ז, כ"ז) עם מלוא הטעמים, המשרתים והמפסיקים</p>
+      <p>כללי דקדוק תימן: עצירה (אתנחתא/זקף) באדום | כיסרא (לפני סוף פסוק) בצהוב</p>
     </div>
-    <div class="status-badge" id="dataStatus">טוען נתוני מסורה...</div>
+    <div class="status-badge" id="dataStatus">טוען...</div>
   </header>
+
+  <!-- נגן השמע המשולב -->
+  <div class="audio-console">
+    <div class="audio-info">
+      <span class="audio-title" id="audioTrackLabel">קריאת מברך חמישי</span>
+      <span class="audio-sub" id="audioTrackStatus">נוסח תימן | החזן ר' יהודה דהרי הי"ו</span>
+    </div>
+
+    <div class="audio-controls">
+      <button class="btn-audio" onclick="seekAudio(-5)" title="5 שניות אחורה">-5s</button>
+      <button class="btn-audio play-main" id="playBtn" onclick="toggleAudio()">▶</button>
+      <button class="btn-audio" onclick="seekAudio(5)" title="5 שניות קדימה">+5s</button>
+
+      <select class="speed-select" onchange="setAudioSpeed(this.value)">
+        <option value="0.8">0.8x</option>
+        <option value="0.85">0.85x</option>
+        <option value="1" selected>1.0x</option>
+        <option value="1.15">1.15x</option>
+      </select>
+
+      <label class="file-input-label" title="טען קובץ שמע מתוך המכשיר">
+        📁 <span style="font-size:0.75rem;">קובץ מקומי</span>
+        <input type="file" id="localAudioPicker" accept="audio/*" style="display:none;" onchange="loadLocalAudio(this)">
+      </label>
+    </div>
+    <audio id="audioEl" preload="metadata"></audio>
+  </div>
 
   <nav class="nav-bar" id="aliyahNav"></nav>
 
@@ -299,20 +387,18 @@
       <button class="mode-btn" onclick="setAppMode('scrollOnly')">מבחן ספר תורה</button>
     </div>
 
-    <div class="toggles-group">
-      <label>
-        <input type="checkbox" id="cuesCheck" checked onchange="toggleVisualCues(this.checked)">
-        הדגשות תחביריות (אדום / צהוב / אפור)
-      </label>
-    </div>
+    <label style="font-size:0.82rem; font-weight:700; cursor:pointer;">
+      <input type="checkbox" id="cuesCheck" checked onchange="toggleVisualCues(this.checked)">
+      הדגשות תחביריות
+    </label>
   </div>
 
   <main class="viewport">
     <div id="dualView" class="dual-columns">
       <div class="col-card" id="tajColCard">
         <div class="col-header">
-          <span>תאג' מנוקד (כל הטעמים)</span>
-          <small>אדום: עוצר | צהוב: כיסרא</small>
+          <span>תאג' מנוקד ומודגש</span>
+          <small>אדום: אתנחתא וזקף | צהוב: כיסרא</small>
         </div>
         <div class="taj-typography" id="tajVersesContainer"></div>
       </div>
@@ -320,7 +406,7 @@
       <div class="col-card">
         <div class="col-header">
           <span>תיקון סופרים (כתב סת"ם)</span>
-          <small>מודגש: עוצר | אפור: כיסרא</small>
+          <small>מודגש: עצירה | אפור: כיסרא</small>
         </div>
         <div class="stam-typography" id="stamVersesContainer"></div>
       </div>
@@ -331,50 +417,47 @@
 </div>
 
 <script>
-  // מפת חלוקת שבעת המברכים בפרשת לך לך לפי מסורת תימן
+  // הגדרת העליות ונתיבי קובצי השמע (ברירת מחדל לקבצים בתיקיית audio/)
   const ALIYOT_DEFS = [
-    { id: 'all', name: 'כל הפרשה ברצף', range: { chStart: 12, vStart: 1, chEnd: 17, vEnd: 27 }, ref: "126 פסוקים" },
-    { id: 1, name: 'מברך ראשון', range: { chStart: 12, vStart: 1, chEnd: 12, vEnd: 13 }, ref: "יב:א-יג" },
-    { id: 2, name: 'מברך שני', range: { chStart: 12, vStart: 14, chEnd: 13, vEnd: 4 }, ref: "יב:יד-יג:ד" },
-    { id: 3, name: 'מברך שלישי', range: { chStart: 13, vStart: 5, chEnd: 13, vEnd: 18 }, ref: "יג:ה-יח" },
-    { id: 4, name: 'מברך רביעי', range: { chStart: 14, vStart: 1, chEnd: 14, vEnd: 24 }, ref: "יד:א-כד" },
-    { id: 5, name: 'מברך חמישי', range: { chStart: 15, vStart: 1, chEnd: 16, vEnd: 16 }, ref: "טו:א-טז:טז" },
-    { id: 6, name: 'מברך ששי', range: { chStart: 17, vStart: 1, chEnd: 17, vEnd: 23 }, ref: "יז:א-כג" },
-    { id: 7, name: 'מברך שביעי', range: { chStart: 17, vStart: 24, chEnd: 17, vEnd: 27 }, ref: "יז:כד-כז" }
+    { id: 1, name: 'מברך ראשון', audioFile: 'audio/aliyah1.mp3', range: { chStart: 12, vStart: 1, chEnd: 12, vEnd: 13 }, ref: "יב:א-יג" },
+    { id: 2, name: 'מברך שני', audioFile: 'audio/aliyah2.mp3', range: { chStart: 12, vStart: 14, chEnd: 13, vEnd: 4 }, ref: "יב:יד-יג:ד" },
+    { id: 3, name: 'מברך שלישי', audioFile: 'audio/aliyah3.mp3', range: { chStart: 13, vStart: 5, chEnd: 13, vEnd: 18 }, ref: "יג:ה-יח" },
+    { id: 4, name: 'מברך רביעי', audioFile: 'audio/aliyah4.mp3', range: { chStart: 14, vStart: 1, chEnd: 14, vEnd: 24 }, ref: "יד:א-כד" },
+    { id: 5, name: 'מברך חמישי', audioFile: 'audio/aliyah5.mp3', range: { chStart: 15, vStart: 1, chEnd: 16, vEnd: 16 }, ref: "טו:א-טז:טז" },
+    { id: 6, name: 'מברך ששי', audioFile: 'audio/aliyah6.mp3', range: { chStart: 17, vStart: 1, chEnd: 17, vEnd: 23 }, ref: "יז:א-כג" },
+    { id: 7, name: 'מברך שביעי', audioFile: 'audio/aliyah7.mp3', range: { chStart: 17, vStart: 24, chEnd: 17, vEnd: 27 }, ref: "יז:כד-כז" },
+    { id: 'all', name: 'כל הפרשה', audioFile: 'audio/all.mp3', range: { chStart: 12, vStart: 1, chEnd: 17, vEnd: 27 }, ref: "126 פסוקים" }
   ];
 
-  // תווי טעמים עוצרים (מפסיקים)
-  // אתנחתא, סגולתא, שלשלת, זקף קטון, זקף גדול, רביעי, צנורית, פשטא, יתיב, תביר, גרש, גרשיים, פזר, תלישא גדולה
-  const STOPPERS_REGEX = /[\u0591\u0592\u0593\u0594\u0595\u0597\u0598\u0599\u059A\u059B\u059C\u059D\u059E\u059F\u05A0\u05A1]/;
+  // כללי דקדוק תימן: עצירה באדום רק באתנחתא (\u0591), סגולתא (\u0592), זקף קטן (\u0594), זקף גדול (\u0595)
+  const PURE_STOPPERS_REGEX = /[\u0591\u0592\u0594\u0595]/;
   const TARCHA_REGEX = /\u0596/; // כִּסְרָא / טַרְחָא
-  const NIKKUD_AND_TEAMIM_REGEX = /[\u0591-\u05BD\u05BF-\u05C2\u05C4\u05C5\u05C7]/g;
+  const NIKKUD_AND_ACCENTS = /[\u0591-\u05BD\u05BF-\u05C2\u05C4\u05C5\u05C7]/g;
 
-  let allVerses = []; // יכיל את כל 126 הפסוקים של הפרשה
-  let currentAliyahId = 5; // ברירת מחדל: מברך חמישי (כמו בצילומי המסך)
+  let allVerses = [];
+  let currentAliyahId = 5;
   let currentMode = 'dual';
 
-  // הפשטת מילה לאותיות סת"ם בלבד
+  const audio = document.getElementById("audioEl");
+  const playBtn = document.getElementById("playBtn");
+
   function toStamWord(w) {
-    return w.replace(NIKKUD_AND_TEAMIM_REGEX, '')
-            .replace(/\u05C3/g, '')  // הסרת סוף פסוק
-            .replace(/\u05C0/g, ''); // הסרת פסיק
+    return w.replace(NIKKUD_AND_ACCENTS, '')
+            .replace(/\u05C3/g, '')
+            .replace(/\u05C0/g, '');
   }
 
-  // ניתוח תחבירי מדויק של מילות הפסוק
-  function analyzeVerse(rawVerseText, chapter, verseNum) {
-    // פירוק למילים לפי רווחים ומקפים
+  function analyzeVerseYemenite(rawVerseText, chapter, verseNum) {
     const tokens = rawVerseText.trim().split(/(\s+)/);
     const parsedWords = [];
 
-    // סריקת מילים בלבד (תוך שמירה על סימני הריווח)
     tokens.forEach(tok => {
       if (/^\s+$/.test(tok) || tok === '') {
         parsedWords.push({ isSpace: true, text: tok });
       } else {
-        const hasStopper = STOPPERS_REGEX.test(tok);
+        const hasStopper = PURE_STOPPERS_REGEX.test(tok);
         const hasTarcha = TARCHA_REGEX.test(tok);
         const hasEtnahta = /\u0591/.test(tok);
-        const hasSofPasuk = /[\u05BD\u05C3]/.test(tok) || tok.includes('׃');
 
         parsedWords.push({
           isSpace: false,
@@ -383,24 +466,21 @@
           hasStopper,
           hasTarcha,
           hasEtnahta,
-          hasSofPasuk,
-          isKisra: false // ייקבע בסריקה לאחור
+          isKisra: false
         });
       }
     });
 
-    // איתור הכיסרא שלפני סוף פסוק: המילה האחרונה הנושאת טרחא (כיסרא) לפני סוף הפסוק
+    // איתור הכיסרא שלפני סוף פסוק בלבד
     for (let i = parsedWords.length - 1; i >= 0; i--) {
       const w = parsedWords[i];
       if (!w.isSpace && w.hasTarcha) {
         w.isKisra = true;
-        break; // זו הכיסרא שלפני סוף הפסוק
+        break;
       }
     }
 
-    // בניית ייצוג HTML לתאג' ולסת"ם
-    let tajHtml = '';
-    let stamHtml = '';
+    let tajHtml = '', stamHtml = '';
     let part1Taj = '', part1Stam = '';
     let part2Taj = '', part2Stam = '';
     let passedEtnahta = false;
@@ -420,7 +500,7 @@
       if (w.isKisra) {
         tajWordHtml = `<span class="kisra-taj-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-kisra">${w.stamOriginal}</span>`;
-      } else if (w.hasStopper || w.hasTarcha) {
+      } else if (w.hasStopper) {
         tajWordHtml = `<span class="stopper-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-stopper">${w.stamOriginal}</span>`;
       }
@@ -456,21 +536,8 @@
     return letters[n] || n;
   }
 
-  // טעינת כל 126 הפסוקים של פרשת לך לך
   async function loadParashatLekhLekha() {
-    const cached = localStorage.getItem("lekh_lekha_tanakh_v1");
-    if (cached) {
-      try {
-        allVerses = JSON.parse(cached);
-        document.getElementById("dataStatus").textContent = "126 פסוקים נטענו במלואם";
-        renderApp();
-        return;
-      } catch (e) {
-        localStorage.removeItem("lekh_lekha_tanakh_v1");
-      }
-    }
-
-    document.getElementById("dataStatus").textContent = "מוריד טקסט מסורה מלא (פרקים יב-יז)...";
+    document.getElementById("dataStatus").textContent = "טוען מסורה...";
 
     try {
       const chapters = [12, 13, 14, 15, 16, 17];
@@ -484,39 +551,25 @@
 
       data.forEach((chData, idx) => {
         const chNum = chapters[idx];
-        const verses = chData.he; // מערך הפסוקים של הפרק עם מלוא הטעמים והניקוד
+        const verses = chData.he;
         verses.forEach((rawText, vIdx) => {
           const vNum = vIdx + 1;
-          const cleanText = rawText.replace(/<[^>]+>/g, ''); // הסרת תגיות אם קיימות
-          parsedList.push(analyzeVerse(cleanText, chNum, vNum));
+          const cleanText = rawText.replace(/<[^>]+>/g, '');
+          parsedList.push(analyzeVerseYemenite(cleanText, chNum, vNum));
         });
       });
 
       allVerses = parsedList;
-      localStorage.setItem("lekh_lekha_tanakh_v1", JSON.stringify(allVerses));
-      document.getElementById("dataStatus").textContent = `הושלם: ${allVerses.length} פסוקים מדויקים`;
+      document.getElementById("dataStatus").textContent = `126 פסוקים מדויקים`;
       renderApp();
+      updateAudioTrack();
     } catch (err) {
-      document.getElementById("dataStatus").textContent = "שגיאה ברשת - נטען עותק גיבוי מקומי";
-      loadOfflineFallback();
+      document.getElementById("dataStatus").textContent = "שגיאה בטעינת הנתונים";
     }
   }
 
-  // גיבוי מקומי מלא למקרה שאין אינטרנט כלל
-  function loadOfflineFallback() {
-    const sample = [
-      { ch: 16, v: 1, text: `וְשָׂרַ֥י אֵֽשֶׁת־אַבְרָ֖ם לֹא־יָלְדָ֣ה ל֑וֹ וְלָהּ֙ שִׁפְחָ֣ה מִצְרִ֔ית וּשְׁמָ֖הּ הָגָֽר׃` },
-      { ch: 16, v: 2, text: `וַתֹּ֨אמֶר שָׂרַ֜י אֶל־אַבְרָ֗ם הִנֵּה־נָ֞א עֲצָרַ֤נִי יְהוָה֙ מִלֶּ֔דֶת בֹּא־נָא֙ אֶל־שִׁפְחָתִ֔י אוּלַ֥י אִבָּנֶ֖ה מִמֶּ֑נָּה וַיִּשְׁמַ֥ע אַבְרָ֖ם לְק֥וֹל שָׂרָֽי׃` },
-      { ch: 16, v: 3, text: `וַתִּקַּ֞ח שָׂרַ֣י אֵֽשֶׁת־אַבְרָ֗ם אֶת־הָגָ֤ר הַמִּצְרִית֙ שִׁפְחָתָ֔הּ מִקֵּץ֙ עֶ֣שֶׂר שָׁנִ֔ים לְשֶׁ֣בֶת אַבְרָ֔ם בְּאֶ֖רֶץ כְּנָ֑עַן וַתִּתֵּ֥ן אֹתָ֛הּ לְאַבְרָ֥ם אִישָׁ֖הּ ל֥וֹ לְאִשָּֽׁה׃` },
-      { ch: 17, v: 1, text: `וַיְהִ֣י אַבְרָ֔ם בֶּן־תִּשְׁעִ֥ים שָׁנָ֖ה וְתֵ֣שַׁע שָׁנִ֑ים וַיֵּרָ֨א יְהוָ֜ה אֶל־אַבְרָ֗ם וַיֹּ֤אמֶר אֵלָיו֙ אֲנִי־אֵ֣ל שַׁדַּ֔י הִתְהַלֵּ֥ךְ לְפָנַ֖י וֶהְיֵ֥ה תָמִֽים׃` }
-    ];
-    allVerses = sample.map(s => analyzeVerse(s.text, s.ch, s.v));
-    renderApp();
-  }
-
-  // סינון פסוקים לפי המברך הנבחר
   function getFilteredVerses() {
-    const currentDef = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[0];
+    const currentDef = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[4];
     if (currentDef.id === 'all') return allVerses;
 
     const { chStart, vStart, chEnd, vEnd } = currentDef.range;
@@ -544,6 +597,7 @@
       btn.onclick = () => {
         currentAliyahId = a.id;
         renderApp();
+        updateAudioTrack();
       };
       nav.appendChild(btn);
     });
@@ -585,7 +639,7 @@
         <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part1Stam}</div>
 
         ${v.part2Taj ? `
-          <div class="chunk-title" style="margin-top:8px;">שלב ב': מאתנחתא עד סוף הפסוק (דרך הכיסרא)</div>
+          <div class="chunk-title" style="margin-top:8px;">שלב ב': מאתנחתא ועד סוף הפסוק (דרך הכיסרא)</div>
           <div class="chunk-part taj-typography">${v.part2Taj}</div>
           <div class="chunk-part stam-typography hidden-stam" onclick="this.classList.toggle('unveiled')">${v.part2Stam}</div>
         ` : ''}
@@ -593,6 +647,49 @@
       container.appendChild(card);
     });
   }
+
+  /* פונקציות נגן השמע */
+  function updateAudioTrack() {
+    const aliyah = ALIYOT_DEFS.find(a => a.id === currentAliyahId) || ALIYOT_DEFS[4];
+    document.getElementById("audioTrackLabel").textContent = `קריאת ${aliyah.name} (${aliyah.ref})`;
+    audio.src = aliyah.audioFile;
+    playBtn.textContent = "▶";
+  }
+
+  function toggleAudio() {
+    if (audio.paused) {
+      audio.play().then(() => {
+        playBtn.textContent = "⏸";
+      }).catch(() => {
+        alert("קובץ השמע אינו זמין בנתיב המקומי. השתמש בכפתור '📁 קובץ מקומי' כדי לטעון אותו מהמכשיר.");
+      });
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶";
+    }
+  }
+
+  function seekAudio(sec) {
+    audio.currentTime += sec;
+  }
+
+  function setAudioSpeed(rate) {
+    audio.playbackRate = parseFloat(rate);
+  }
+
+  function loadLocalAudio(input) {
+    const file = input.files[0];
+    if (file) {
+      audio.src = URL.createObjectURL(file);
+      document.getElementById("audioTrackStatus").textContent = `קובץ מקומי: ${file.name}`;
+      audio.play();
+      playBtn.textContent = "⏸";
+    }
+  }
+
+  audio.addEventListener("ended", () => {
+    playBtn.textContent = "▶";
+  });
 
   function setAppMode(mode) {
     currentMode = mode;
@@ -613,7 +710,7 @@
     } else if (mode === 'scrollOnly') {
       dualView.classList.remove("hidden");
       chunksView.classList.add("hidden");
-      tajCol.classList.add("hidden"); // מסתיר את התאג' לקריאה חופשית בסת"ם
+      tajCol.classList.add("hidden");
     }
   }
 
