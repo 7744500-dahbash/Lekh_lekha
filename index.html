@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>תאג' תורת אבות - פרשת לך לך המלאה עם שמע</title>
+  <title>תאג' תורת אבות - פרשת לך לך המלאה | דקדוק תימן המדויק</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,10 @@
       --primary: #172554;
       --primary-light: #1e3a8a;
       --accent: #b45309;
-      --stopper-red: #c53030;
-      --kisra-taj: #fef08a;
-      --kisra-stam: #cbd5e1;
+      --stopper-red: #c53030;       /* אדום: עוצר (אתנחתא, זקף) */
+      --pause-orange: #ea580c;      /* כתום: מטעים / הפסקה קלה (פשטא, יתיב בראש מילה) */
+      --kisra-taj: #fef08a;         /* צהוב: כיסרא בתאג' */
+      --kisra-stam: #cbd5e1;        /* אפור: כיסרא בסת"ם */
       --border: #e2e8f0;
       --bg: #f8fafc;
       --card-bg: #ffffff;
@@ -37,7 +38,7 @@
 
     .app-shell {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1100px;
       background: var(--card-bg);
       border-radius: 14px;
       border: 1px solid var(--border);
@@ -82,27 +83,11 @@
       gap: 12px;
     }
 
-    .audio-info {
-      display: flex;
-      flex-direction: column;
-    }
+    .audio-info { display: flex; flex-direction: column; }
+    .audio-title { font-size: 0.95rem; font-weight: 800; color: var(--primary); }
+    .audio-sub { font-size: 0.78rem; color: #64748b; }
 
-    .audio-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .audio-sub {
-      font-size: 0.78rem;
-      color: #64748b;
-    }
-
-    .audio-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .audio-controls { display: flex; align-items: center; gap: 8px; }
 
     .btn-audio {
       background: #fff;
@@ -112,9 +97,6 @@
       font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .btn-audio.play-main {
@@ -125,6 +107,9 @@
       height: 38px;
       border-radius: 50%;
       font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .speed-select {
@@ -179,6 +164,7 @@
       border-color: var(--primary);
     }
 
+    /* סרגל מקרא והגדרות */
     .toolbar {
       padding: 10px 16px;
       display: flex;
@@ -214,6 +200,19 @@
       color: var(--primary);
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
+
+    .legend-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .dot-box { width: 10px; height: 10px; border-radius: 2px; display: inline-block; vertical-align: middle; }
+    .dot-red { background: var(--stopper-red); }
+    .dot-orange { background: var(--pause-orange); }
+    .dot-yellow { background: var(--kisra-taj); border: 1px solid #d97706; }
 
     /* תוכן הקריאה */
     .viewport {
@@ -274,22 +273,33 @@
       letter-spacing: 0.6px;
     }
 
-    /* סימונים תחביריים מדויקים בלבד */
+    /* סימונים תחביריים לפי דקדוק תימן */
     .apply-cues .stopper-word {
       color: var(--stopper-red) !important;
       font-weight: 800;
+    }
+
+    .apply-cues .orange-pause-word {
+      color: var(--pause-orange) !important;
+      font-weight: 700;
     }
 
     .apply-cues .kisra-taj-word {
       background-color: var(--kisra-taj);
       padding: 0 4px;
       border-radius: 4px;
+      font-weight: 700;
     }
 
     .apply-cues .stam-stopper {
       font-weight: 900;
       color: #000;
       text-decoration: underline 1.5px #94a3b8;
+    }
+
+    .apply-cues .stam-orange {
+      color: #9a3412;
+      font-weight: 700;
     }
 
     .apply-cues .stam-kisra {
@@ -333,10 +343,11 @@
     .hidden-stam.unveiled { filter: none; }
     .hidden { display: none !important; }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       .dual-columns { grid-template-columns: 1fr; }
       .audio-console { flex-direction: column; align-items: flex-start; }
       .audio-controls { width: 100%; justify-content: space-between; }
+      .legend-bar { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -346,7 +357,7 @@
   <header>
     <div class="brand">
       <h1>תאג' תורת אבות - פרשת לך לך המלאה</h1>
-      <p>כללי דקדוק תימן: עצירה (אתנחתא/זקף) באדום | כיסרא (לפני סוף פסוק) בצהוב</p>
+      <p>כללי דקדוק תימן: עצירה (באדום) | מטעים / פשטא / יתיב (בכתום) | כיסרא (בצהוב)</p>
     </div>
     <div class="status-badge" id="dataStatus">טוען...</div>
   </header>
@@ -387,18 +398,22 @@
       <button class="mode-btn" onclick="setAppMode('scrollOnly')">מבחן ספר תורה</button>
     </div>
 
-    <label style="font-size:0.82rem; font-weight:700; cursor:pointer;">
-      <input type="checkbox" id="cuesCheck" checked onchange="toggleVisualCues(this.checked)">
-      הדגשות תחביריות
-    </label>
+    <div class="legend-bar">
+      <span><span class="dot-box dot-red"></span> עוצר (אתנחתא/זקף)</span>
+      <span><span class="dot-box dot-orange"></span> מטעים / פשטא / יתיב</span>
+      <span><span class="dot-box dot-yellow"></span> כיסרא</span>
+      <label style="cursor:pointer; margin-right:8px;">
+        <input type="checkbox" id="cuesCheck" checked onchange="toggleVisualCues(this.checked)"> הדגשות
+      </label>
+    </div>
   </div>
 
   <main class="viewport">
     <div id="dualView" class="dual-columns">
       <div class="col-card" id="tajColCard">
         <div class="col-header">
-          <span>תאג' מנוקד ומודגש</span>
-          <small>אדום: אתנחתא וזקף | צהוב: כיסרא</small>
+          <span>תאג' מנוקד (דקדוק תימן)</span>
+          <small>אדום: עוצר | כתום: מטעים | צהוב: כיסרא</small>
         </div>
         <div class="taj-typography" id="tajVersesContainer"></div>
       </div>
@@ -406,7 +421,7 @@
       <div class="col-card">
         <div class="col-header">
           <span>תיקון סופרים (כתב סת"ם)</span>
-          <small>מודגש: עצירה | אפור: כיסרא</small>
+          <small>מודגש: עוצר | כתום: מטעים | אפור: כיסרא</small>
         </div>
         <div class="stam-typography" id="stamVersesContainer"></div>
       </div>
@@ -417,7 +432,6 @@
 </div>
 
 <script>
-  // הגדרת העליות ונתיבי קובצי השמע (ברירת מחדל לקבצים בתיקיית audio/)
   const ALIYOT_DEFS = [
     { id: 1, name: 'מברך ראשון', audioFile: 'audio/aliyah1.mp3', range: { chStart: 12, vStart: 1, chEnd: 12, vEnd: 13 }, ref: "יב:א-יג" },
     { id: 2, name: 'מברך שני', audioFile: 'audio/aliyah2.mp3', range: { chStart: 12, vStart: 14, chEnd: 13, vEnd: 4 }, ref: "יב:יד-יג:ד" },
@@ -429,9 +443,16 @@
     { id: 'all', name: 'כל הפרשה', audioFile: 'audio/all.mp3', range: { chStart: 12, vStart: 1, chEnd: 17, vEnd: 27 }, ref: "126 פסוקים" }
   ];
 
-  // כללי דקדוק תימן: עצירה באדום רק באתנחתא (\u0591), סגולתא (\u0592), זקף קטן (\u0594), זקף גדול (\u0595)
+  // 1. עוצרים אמיתיים בלבד (באדום): אתנחתא (\u0591), סגולתא (\u0592), זקף קטון (\u0594), זקף גדול (\u0595)
   const PURE_STOPPERS_REGEX = /[\u0591\u0592\u0594\u0595]/;
-  const TARCHA_REGEX = /\u0596/; // כִּסְרָא / טַרְחָא
+
+  // 2. כיסרא שלפני סוף פסוק (בצהוב/אפור): טַרְחָא (\u0596)
+  const TARCHA_REGEX = /\u0596/;
+
+  // 3. מטעימים / הפסקה קלה (בכתום):
+  // פשטא (\u0599), יתיב - שופר הפוך בראש תיבה (\u059A), רביעי (\u0597), תביר (\u059B), גרש (\u059C), גרשיים (\u059D), פזר (\u05A1), תלישא גדולה (\u05A0), זרקא (\u0598)
+  const LIGHT_PAUSE_REGEX = /[\u0599\u059A\u0597\u059B\u059C\u059D\u059E\u059F\u05A0\u05A1\u0598]/;
+
   const NIKKUD_AND_ACCENTS = /[\u0591-\u05BD\u05BF-\u05C2\u05C4\u05C5\u05C7]/g;
 
   let allVerses = [];
@@ -457,6 +478,7 @@
       } else {
         const hasStopper = PURE_STOPPERS_REGEX.test(tok);
         const hasTarcha = TARCHA_REGEX.test(tok);
+        const hasLightPause = LIGHT_PAUSE_REGEX.test(tok);
         const hasEtnahta = /\u0591/.test(tok);
 
         parsedWords.push({
@@ -465,13 +487,14 @@
           stamOriginal: toStamWord(tok),
           hasStopper,
           hasTarcha,
+          hasLightPause,
           hasEtnahta,
           isKisra: false
         });
       }
     });
 
-    // איתור הכיסרא שלפני סוף פסוק בלבד
+    // איתור הכיסרא: אך ורק הטַרְחָא האחרונה שלפני סוף הפסוק
     for (let i = parsedWords.length - 1; i >= 0; i--) {
       const w = parsedWords[i];
       if (!w.isSpace && w.hasTarcha) {
@@ -498,12 +521,19 @@
       let stamWordHtml = w.stamOriginal;
 
       if (w.isKisra) {
+        // כיסרא לפני סוף פסוק
         tajWordHtml = `<span class="kisra-taj-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-kisra">${w.stamOriginal}</span>`;
       } else if (w.hasStopper) {
+        // עוצר (אתנחתא, זקף) באדום
         tajWordHtml = `<span class="stopper-word">${w.tajOriginal}</span>`;
         stamWordHtml = `<span class="stam-stopper">${w.stamOriginal}</span>`;
+      } else if (w.hasLightPause) {
+        // מטעים / פשטא / יתיב (שופר הפוך בראש מילה) בכתום!
+        tajWordHtml = `<span class="orange-pause-word">${w.tajOriginal}</span>`;
+        stamWordHtml = `<span class="stam-orange">${w.stamOriginal}</span>`;
       }
+      // שאר הטעמים: מהפך, מונח, מרכא, קדמא - נשארים טקסט רגיל (משרתים)
 
       tajHtml += tajWordHtml;
       stamHtml += stamWordHtml;
@@ -564,7 +594,7 @@
       renderApp();
       updateAudioTrack();
     } catch (err) {
-      document.getElementById("dataStatus").textContent = "שגיאה בטעינת הנתונים";
+      document.getElementById("dataStatus").textContent = "שגיאה ברשת";
     }
   }
 
@@ -661,7 +691,7 @@
       audio.play().then(() => {
         playBtn.textContent = "⏸";
       }).catch(() => {
-        alert("קובץ השמע אינו זמין בנתיב המקומי. השתמש בכפתור '📁 קובץ מקומי' כדי לטעון אותו מהמכשיר.");
+        alert("קובץ השמע אינו זמין בנתיב המקומי. השתמש בכפתור '📁 קובץ מקומי' כדי לטעון אותו ישירות מהמכשיר.");
       });
     } else {
       audio.pause();
@@ -669,13 +699,8 @@
     }
   }
 
-  function seekAudio(sec) {
-    audio.currentTime += sec;
-  }
-
-  function setAudioSpeed(rate) {
-    audio.playbackRate = parseFloat(rate);
-  }
+  function seekAudio(sec) { audio.currentTime += sec; }
+  function setAudioSpeed(rate) { audio.playbackRate = parseFloat(rate); }
 
   function loadLocalAudio(input) {
     const file = input.files[0];
@@ -687,9 +712,7 @@
     }
   }
 
-  audio.addEventListener("ended", () => {
-    playBtn.textContent = "▶";
-  });
+  audio.addEventListener("ended", () => { playBtn.textContent = "▶"; });
 
   function setAppMode(mode) {
     currentMode = mode;
